@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的学习笔记</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>我的学习笔记</h1>
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="搜索笔记...">
+            <button id="searchBtn">搜索</button>
+        </div>
+    </header>
+
+    <main>
+        <div class="sidebar">
+            <h2>笔记分类</h2>
+            <ul id="categories">
+                <li class="active" data-category="all">全部笔记</li>
+                <li data-category="programming">编程</li>
+                <li data-category="language">语言</li>
+                <li data-category="other">其他</li>
+            </ul>
+            <button id="addNoteBtn" class="add-note-btn">添加笔记</button>
+        </div>
+
+        <div class="content">
+            <div id="notesList" class="notes-grid">
+                <!-- 笔记将通过 JavaScript 动态添加 -->
+            </div>
+        </div>
+    </main>
+
+    <!-- 添加笔记的模态框 -->
+    <div id="noteModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>添加新笔记</h2>
+            <form id="noteForm">
+                <div class="form-group">
+                    <label for="noteTitle">标题</label>
+                    <input type="text" id="noteTitle" required>
+                </div>
+                <div class="form-group">
+                    <label for="noteCategory">分类</label>
+                    <select id="noteCategory" required>
+                        <option value="programming">编程</option>
+                        <option value="language">语言</option>
+                        <option value="other">其他</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="noteContent">内容</label>
+                    <textarea id="noteContent" rows="10" required></textarea>
+                </div>
+                <button type="submit">保存</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2024 我的学习笔记. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html> 
