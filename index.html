@@ -3,74 +3,192 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>三傻子的日常</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    <title>什么版</title>
     <link rel="icon" type="image/png" href="/favicon-32x32.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
+    <style>
+        body {
+            font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', Arial, sans-serif;
+            background: #fafbfc;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            padding: 32px 40px 40px 40px;
+        }
+        .search-bar {
+            display: flex;
+            align-items: center;
+            margin-bottom: 32px;
+        }
+        .search-bar label {
+            font-size: 16px;
+            margin-right: 8px;
+        }
+        .search-bar input[type="text"] {
+            width: 260px;
+            padding: 8px 12px;
+            font-size: 16px;
+            border: 1px solid #d9d9d9;
+            border-radius: 4px;
+            margin-right: 12px;
+        }
+        .search-bar button {
+            background: #3574f0;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            padding: 8px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .search-bar button:hover {
+            background: #265dc1;
+        }
+        .info-section {
+            margin-top: 16px;
+        }
+        .info-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 18px;
+        }
+        .info-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .info-table th, .info-table td {
+            text-align: left;
+            padding: 18px 8px;
+            font-size: 16px;
+        }
+        .info-table th {
+            color: #888;
+            width: 120px;
+            font-weight: 500;
+        }
+        .info-table td {
+            color: #222;
+        }
+        .status-normal {
+            color: #e53935;
+            font-weight: bold;
+        }
+        .realname {
+            color: #e53935;
+            font-weight: bold;
+        }
+        .realname-action, .update-btn {
+            color: #fff !important;
+        }
+        .realname-action {
+            background: #e53935;
+            border: none;
+            border-radius: 4px;
+            padding: 2px 10px;
+            font-size: 13px;
+            margin-left: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background 0.2s;
+            display: inline-block;
+        }
+        .realname-action:hover {
+            background: #b71c1c;
+        }
+        .update-btn {
+            background: #ffb300;
+            border: none;
+            border-radius: 4px;
+            padding: 2px 10px;
+            font-size: 13px;
+            margin-left: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background 0.2s;
+            display: inline-block;
+        }
+        .update-btn:hover {
+            background: #ffa000;
+        }
+        .editable {
+            border: none;
+            border-radius: 3px;
+            padding: 0 6px;
+            min-width: 40px;
+            display: inline-block;
+            background: transparent;
+        }
+        .editable:focus {
+            outline: 2px solid #3574f0;
+            background: #fff;
+        }
+        .version-tag {
+            display: inline-block;
+            background: #f5f5f5;
+            color: #3574f0;
+            border-radius: 4px;
+            padding: 2px 10px;
+            font-size: 15px;
+            margin-left: 8px;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>三傻子的日常</h1>
-        <div class="search-container">
-            <input type="text" id="searchInput" placeholder="搜索笔记...">
-            <button id="searchBtn">搜索</button>
+    <div class="container">
+        <div class="search-bar">
+            <label for="deviceInput">ICCID/设备号：</label>
+            <input type="text" id="deviceInput" placeholder="请输入设备号" />
+            <button onclick="searchDevice()">搜索查询</button>
         </div>
-    </header>
-
-    <main>
-        <div class="sidebar">
-            <h2>分类</h2>
-            <ul id="categories">
-                <li class="active" data-category="all">全部笔记</li>
-                <li data-category="programming">编程</li>
-                <li data-category="language">语言</li>
-                <li data-category="other">其他</li>
-            </ul>
-            <button id="addNoteBtn" class="add-note-btn">添加笔记</button>
-        </div>
-
-        <div class="content">
-            <div id="notesList" class="notes-grid">
-                <!-- 笔记将通过 JavaScript 动态添加 -->
-            </div>
-        </div>
-    </main>
-
-    <!-- 添加笔记的模态框 -->
-    <div id="noteModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>添加新笔记</h2>
-            <form id="noteForm">
-                <div class="form-group">
-                    <label for="noteTitle">标题</label>
-                    <input type="text" id="noteTitle" required>
-                </div>
-                <div class="form-group">
-                    <label for="noteCategory">分类</label>
-                    <select id="noteCategory" required>
-                        <option value="programming">编程</option>
-                        <option value="language">语言</option>
-                        <option value="other">其他</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="noteContent">内容</label>
-                    <textarea id="noteContent" rows="10" required></textarea>
-                </div>
-                <button type="submit">保存</button>
-            </form>
+        <div class="info-section">
+            <span class="info-title">基本信息 <span class="version-tag" id="version" contenteditable="true" class="editable">巅峰版</span></span>
+            <table class="info-table">
+                <tr>
+                    <th>ICCID</th>
+                    <td id="iccid" contenteditable="true" class="editable">898662460001392599</td>
+                </tr>
+                <tr>
+                    <th>网卡状态</th>
+                    <td class="status-normal editable" id="status" contenteditable="true">正常</td>
+                </tr>
+                <tr>
+                    <th>代理商</th>
+                    <td id="agent" contenteditable="true" class="editable">MEGA网络服务中心</td>
+                </tr>
+                <tr>
+                    <th>运营商实名</th>
+                    <td>
+                        <span class="realname editable" id="realname" contenteditable="true">已实名</span>
+                        <button class="realname-action" onclick="alert('查询实名信息')">查询</button>
+                        <button class="update-btn" onclick="alert('更新实名信息')">更新</button>
+                    </td>
+                </tr>
+                <tr>
+                    <th>设备号</th>
+                    <td id="device" contenteditable="true" class="editable">62460001392599</td>
+                </tr>
+            </table>
         </div>
     </div>
-
-    <footer>
-        <p>© 2024 我的学习笔记. All rights reserved.</p>
-    </footer>
-
-    <script src="script.js"></script>
+    <script>
+        function searchDevice() {
+            const deviceInput = document.getElementById('deviceInput').value.trim();
+            let device = deviceInput || '62460001392599';
+            let iccid = device.startsWith('8986') ? device : '8986' + device;
+            document.getElementById('device').textContent = device;
+            document.getElementById('iccid').textContent = iccid;
+        }
+    </script>
 </body>
 </html> 
